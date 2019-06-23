@@ -99,6 +99,17 @@ def write_csv(places, fn, city):
                 csv_writer.writerow([p[0], p[2], p[3], p[4], p[5], p[6]])
 
 
+'''***********************************************
+                    scrapeData
+    purpose:
+        creates set of data
+    parameters:
+        fn - filename
+        citystate - city + state for scraping
+        city - city name for csv writing
+    return:
+        None
+***********************************************'''
 def scrapeData(fn, citystate, city):
     credsfile = open("../Geo-Credentials/creds.txt", "r")
     keyval = credsfile.read()
@@ -123,7 +134,6 @@ def scrapeData(fn, citystate, city):
     groc_list = list(gplaces.difference(cplaces))
 
     write_csv(groc_list, fn, city)
-
 
 def main():
     if (len(sys.argv) != 4):

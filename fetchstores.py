@@ -98,16 +98,8 @@ def write_csv(places, fn, city):
             if city in p[4] and int(p[6]) > 5 and "Dollar" not in p[0]: # filter out dollar stores and stores outside the city
                 csv_writer.writerow([p[0], p[2], p[3], p[4], p[5], p[6]])
 
-def main():
-    if (len(sys.argv) != 4):
-        print("Please input in the following format: python fetchstores.py <file> <city> <state abbrev>")
-        return 1
 
-    fn = str(sys.argv[1]) + ".csv"
-    city = str(sys.argv[2])
-    state = str(sys.argv[3])
-    citystate = city + ", " + state
-
+def scrapeData(fn, citystate, city):
     credsfile = open("../Geo-Credentials/creds.txt", "r")
     keyval = credsfile.read()
     coords = []
@@ -132,4 +124,16 @@ def main():
 
     write_csv(groc_list, fn, city)
 
+
+def main():
+    if (len(sys.argv) != 4):
+        print("Please input in the following format: python fetchstores.py <file> <city> <state abbrev>")
+        return 1
+
+    fn = str(sys.argv[1]) + ".csv"
+    city = str(sys.argv[2])
+    state = str(sys.argv[3])
+    citystate = city + ", " + state
+
+    scrapeData(fn, citystate, city)
 main()
